@@ -1,0 +1,91 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+
+#defaults settings - OS independent, will be merged with and overridden by OS specific settings
+defaults:
+  pkgs:
+    - gitolite3
+  groups:
+    git:
+      gid: 411
+    gitolite3:
+      gid: 419
+  users:
+    git:
+      uid: 411
+      home: /srv/git
+      home_mode: "0750"
+      shell: /bin/bash
+      fullname: "git repository hosting"
+      groups:
+        - git
+
+    gitolite3:
+      uid: 419
+      home: /var/lib/gitolite3
+      home_mode: "0750"
+      shell: /bin/sh
+      fullname: "git repository hosting"
+      groups:
+        - gitolite3
+
+  conffile: '.gitolite.rc'
+
+  conf:
+    UMASK:  "0077"
+    GIT_CONFIG_KEYS:  "'.*'"
+    LOG_EXTRA:  "1"
+    # LOG_DEST: "'repo-log,syslog,normal'"
+    # LOG_FACILITY: "'local4'"
+
+    ROLES:
+      READERS:  "1"
+      WRITERS:  "1"
+
+    # CACHE:  "'Redis'"
+    # SITE_INFO: "'Please see http://blahblah/gitolite for more help'"
+    # DISPLAY_CPU_TIME:  "1"
+    # CPU_TIME_WARN_LIMIT:  "0.1"
+    # HOSTNAME:  '"foo"'
+    # CACHE_TTL:  "600"
+    # LOCAL_CODE:  '"$rc{GL_ADMIN_BASE}/local"'
+
+    ENABLE:
+      - "'help'"
+      - "'desc'"
+      - "'info'"
+      - "'perms'"
+      - "'writable'"
+
+      #- "'create'"
+      #- "'fork'"
+      #- "'mirror'"
+      #- "'readme'"
+      #- "'sskm'"
+      #- "'D'"
+
+      - "'ssh-authkeys'"
+      - "'git-config'"
+      - "'daemon'"
+      - "'gitweb'"
+
+      #- "'no-create-on-read'"
+      #- "'no-auto-create'"
+      #- "'Alias'"
+      #- '"Shell $ENV{HOME}/.gitolite.shell-users"'
+      #- "'Shell alice bob'"
+      #- "'set-default-roles'"
+      #- "'expand-deny-messages'"
+      #- "'Motd'"
+      #- "'Mirroring'"
+      #- "'ssh-authkeys-split'"
+      #- "'partial-copy'"
+      #- "'upstream'"
+      - "'cgit'"
+      #- "'repo-specific-hooks'"
+      #- "'renice 10'"
+      #- "'CpuTime'"
+      #- "'continuation-lines'"
+      #- "'keysubdirs-as-groups'"
+      #- "'macros'"
+      #- "'Kindergarten'"

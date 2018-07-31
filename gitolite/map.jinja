@@ -1,0 +1,25 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+
+#defaults settings - OS independent, will be merged with and overridden by OS specific settings
+{% import_yaml "gitolite/maps/defaults.map" as gitolite_defaults %}
+
+#overrides defaults, used if OS specific settings for current OS could not be found in os.map 
+{% import_yaml "gitolite/maps/osdefaults.map" as gitolite_osdefaults %}
+
+#overrides defaults, OS specific
+{% import_yaml "gitolite/maps/os.map" as gitolite_os %}
+
+{% set gitolite_os_family = {} %}
+
+{% do gitolite_os_family.update(gitolite_defaults) %}
+{% do gitolite_os_family.update(gitolite_osdefaults) %}
+{% do gitolite_os_family.update(gitolite_os) %}
+
+# - defaults is merged with and overridden by OS specific settings (os, if current OS is defined in os.map, osdefaults if current OS is not defined in os.map) 
+# - resulting dict is merged with 'gitolite:lookup' - pillar (pillar overrides)
+{%- set gitolite_default_plus_pillar_lookup = salt['grains.filter_by'](gitolite_os_family, grain='os_family', merge=salt['pillar.get']('gitolite:lookup'), default='osdefaults', base='defaults') %}
+
+#FIXME: why this insane double merge in salt pillars
+# now gitolite_default_plus_pillar_lookup is merged with 'gitolite'-pillar ('gitolite'-pillar overrides gitolite_default_plus_pillar_lookup)
+{%- set gitolite = salt['pillar.get']('gitolite', default=gitolite_default_plus_pillar_lookup, merge=True) %}

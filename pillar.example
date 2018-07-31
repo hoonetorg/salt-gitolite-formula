@@ -1,0 +1,21 @@
+gitolite:
+  lookup:
+    hooks:
+      post-receive: |
+          #!/bin/sh
+          echo "... do something here ..."
+            
+    ssh_admin_key_pub:
+      content:
+        ssh-rsa AAAA..... gitadmin@example.org
+      name:
+        gitadmin@example.org
+    users:
+      git:
+        ssh_key_cipher: rsa
+        ssh_private_key: |
+          -----BEGIN RSA PRIVATE KEY-----
+          M....
+          -----END RSA PRIVATE KEY-----
+        ssh_public_key: |
+          ssh-rsa AAAA..... git@example.org

@@ -32,7 +32,7 @@ defaults:
   conffile: '.gitolite.rc'
 
   conf:
-    UMASK:  "0077"
+    UMASK:  "0027"
     GIT_CONFIG_KEYS:  "'.*'"
     LOG_EXTRA:  "1"
     # LOG_DEST: "'repo-log,syslog,normal'"

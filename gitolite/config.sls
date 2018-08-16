@@ -6,6 +6,7 @@
 gitolite_config__file_projects.list:
   file.managed:
     - name: {{gitolite.get('users', {}).get('git', {}).get('home')}}/projects.list
+    - replace: False
     - user: git
     - group: git
     - mode: "'0640'"

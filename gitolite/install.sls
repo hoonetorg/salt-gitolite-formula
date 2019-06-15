@@ -5,4 +5,4 @@
 
 gitolite_install__pkg:
   pkg.installed:
-    - pkgs: {{ gitolite.pkgs }}
+    - pkgs: {{ gitolite.pkgs | tojson }}

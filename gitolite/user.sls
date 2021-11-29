@@ -71,6 +71,6 @@ gitolite_user__sshpubkey_{{ user }}:
 
 gitolite_user__finished:
   cmd.run:
-    - name: true
-    - unless: true
+    - name: "true"
+    - unless: "true"
 
